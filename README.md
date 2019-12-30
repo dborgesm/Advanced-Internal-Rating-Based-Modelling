@@ -8,6 +8,10 @@ In this analysis is presented how to create a scorecard using [Lending Club](htt
 In addition, two Loss Given Default models were develop using Random Forest and XGBoosting, the importance of the features will be analyzed, and the final model will be selected comparing performance metrics.
 
 ## Data preprocessing
-In this step the aim is to clean the data set to make it ready for a [credit scoring application model](https://github.com/dborgesm/Banking-Analytics/blob/master/Data_Preprocessing_for_Credit_Scoring_Application.ipynb) and for a Loss Given Default (LGD) model. The process of cleaning will include spotting missing values, filtering irrelevant variables, detecting outliers and treating them, coarse classification and recoding categorical variables. It is important to mentioned that this is an unbalanced data there are approximately only 13% default cases.
+1. [Data preprocessing for a credit scoring application model](https://github.com/dborgesm/Banking-Analytics/blob/master/Data_Preprocessing_for_Credit_Scoring_Application.ipynb) 
+
+2.  [Data preprocessing for a Loss Given Default (LGD) model](https://github.com/dborgesm/Banking-Analytics/blob/master/Data_Preprocessing_for_LGD_model.ipynb). The only difference from the process above is that here the objective variable was the LGD and the correlation between the LGD and the other variables was analyzed. 
+
+The process of cleaning included spotting missing values, filtering irrelevant variables, detecting outliers and treating them, coarse classification and recoding categorical variables. It is important to mentioned that this is an unbalanced data there are approximately only 13% default cases.
 
 

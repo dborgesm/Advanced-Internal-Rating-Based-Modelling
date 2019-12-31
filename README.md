@@ -45,5 +45,23 @@ The final score was calculated using the test sample, using as base points 700 a
 
 The code for the modelling process can be found [here](https://github.com/dborgesm/Banking-Analytics/blob/master/Modelling_for_Scorecard_Application.ipynb).
 
+## LGD Modelling
 
+For this two models were used Random Forest and XGBoosting. [Here](https://github.com/dborgesm/Banking-Analytics/blob/master/LGD_Modelling.ipynb) is the code used for the modelling.
+
+### Random Forest 
+
+The first LGD model was constructed using a random forest regressor of 1000 trees, the number of maximum features was limited to 10, meaning that each will choose a different random sample of 10 features for each split, this will result in the trees being even less correlated with one another, also cross validation was used to measure the performance and considering the other models (using different maximum features) the resulted cross validation mean loss was 0.1167, which is lower than the model using the default parameters of Random Forest (0.1818).
+
+Among the important features of the model, I consider the most relevant were all util, which tells us the total balance in the credit cards, the maximum current balance owed, the months since they open an installment account and the number of accounts opened, these reveals part of the financial behavior of the client. Debt settlement flag resulted in the most important, which is unusual because it does not tell us relevant information, however it was not correlated with the LGD variable, so there was no reason to remove it. 
+
+The MSE over the test set was 0.00989, the predictions were closed to the true values.
+
+### XGBoosting
+
+The important features of the XGB were different from the random forest, the total settlement debt flag and all util had the most significant weight, and the other predictors had an importance between 3% and 0.0099%, this does not mean that all of them are useful but the ones with a low percentage were used less to make key decisions with small decisions trees.
+
+The MSE over the test set was 0.0083, a little bit lower in comparison with the MSE of the random forest. 
+
+After analyzing the results and remembering that the LGD workout considers the economic notion of loss including the costs related to the collection process, I think both models highlight the parameters related to the characteristics of the loan at the moment of default (maximum balance, accounts open, etc.) however, I prefer the random forest model because we are using a considerable big data set, which makes the model more robust and it didn’t overfit the training data. In terms of MSE, they were not that far apart, probably the XGBoosting is overfitting a little. Also, the parameters have at least one percentage of importance which makes the model more complex and this can cause large errors on large exposures. 
 

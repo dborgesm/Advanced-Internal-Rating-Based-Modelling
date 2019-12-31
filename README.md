@@ -36,3 +36,14 @@ After cleaning the data 45, variables were left, almost all the variables to mod
 
 First, the data was divided into training and testing (70%/30%), the indeterminates cases were removed only from the training sample. Then, the variables were binned using sequentially trees with the following constraints, 5% of minimum cases per final bins and a maximum of 50 bins, the cuts chosen, maximize the information value (IV), and gave an explainable trend. After this process and analyzing the IV, most variables had an information value less than 0.1 and not even close to 0.09, being to strict in this part will only left 3 variables for training so all the variables with less than 0.07 IV were removed, and LASSO is going to be used as a next filter. The code with all this process is [here](https://github.com/dborgesm/Banking-Analytics/blob/master/Normalizing_the_data_using_WOE.ipynb).
 
+Afterward, the model was trained using logistic regression, with lasso as penalization, regularization strength of 1, and 10,000 iterations. Three models were evaluated the first one with all the variables, the second one with variables with an IV higher than 0.08 and the third using only variables with IV higher than 0.1. Cross-validation was used to evaluate the performance of each model; the resulted mean score for the three of them was around 0.60. The selected model was the one with IV greater than 0.08, the reason for this is because having variables with smaller information value brings more noise to the model and having only three variables do not return enough information. Subsequently, cross-validation was used to search for the best parameters and resulted in C = 100. The final variables to model the PD are the interest rate, all util, months since recent installment, maximum current balance and remaining balance in all credit cards. 
+
+The resulted confusion matrix shows that the model only was able to estimate 67% of true defaulters and 61% of true non defaulters. Meaning that this model is a little bit better in predicting bad payers than good payers. 
+The AUC is 68.6%, this means that if we want to predict correctly 60% of bad payers, the error on the good payer is approximately 30%, meaning that 1 of every 3 good payers is incorrectly classified. In conclusion, this is not a very skillful model to classify the bad payers. 
+
+The final score was calculated using the test sample, using as base points 700 and PDO of 50.
+
+The code for the modelling process can be found [here](https://github.com/dborgesm/Banking-Analytics/blob/master/Modelling_for_Scorecard_Application.ipynb).
+
+
+
